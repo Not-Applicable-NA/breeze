@@ -51,6 +51,16 @@ services:
                 - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
+    adminer:
+        image: adminer:latest
+        ports:
+            - '8080:8080'
+        restart:
+            always
+        networks:
+            - sail
+        environment:
+            ADMINER_DESIGN: 'pepa-linha-dark'
     redis:
         image: 'redis:alpine'
         ports:
