@@ -13,8 +13,10 @@ class DepartmentSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('departments')->insert(['name' => '経営情報学部']);
-        DB::table('departments')->insert(['name' => '医療情報学部']);
-        DB::table('departments')->insert(['name' => '情報メディア学部']);
+        DB::table('departments')->insert([
+            [ 'name' => '経営情報学部' ],
+            [ 'name' => '医療情報学部' ],
+            [ 'name' => '情報メディア学部' ]
+        ]);
     }
 }
