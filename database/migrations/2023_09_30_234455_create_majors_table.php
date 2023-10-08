@@ -23,6 +23,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // 学科テーブルを削除
+        Schema::table('majors', function (Blueprint $table) {
+            $table->dropForeign('majors_department_id_foreign');
+        });
         Schema::dropIfExists('majors');
     }
 };
