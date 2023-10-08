@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Major;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -15,12 +16,23 @@ use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
+
+    private $major;
+
+    public function __construct() {
+        $this->major = new Major();
+    }
+
     /**
      * Display the registration view.
      */
     public function create(): View
     {
-        return view('auth.register');
+        $majors = $this->major->getAllMajors();
+        return view(
+            'auth.register',
+            compact('majors')
+        );
     }
 
     /**

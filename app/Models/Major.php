@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Major extends Model
 {
     use HasFactory;
+
+    public function getAllMajors() {
+        return $this->all();
+    }
 }
