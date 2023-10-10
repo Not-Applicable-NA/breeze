@@ -49,12 +49,12 @@ class RegisteredUserController extends Controller
             'major' => ['required', 'string'],
         ]);
 
-        $majorId = $this->major->getMajor($request->major)->id;
+        $major = $this->major->getMajor($request->major)->name;
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'major_id' => $majorId
+            'major' => $major
         ]);
 
         event(new Registered($user));
