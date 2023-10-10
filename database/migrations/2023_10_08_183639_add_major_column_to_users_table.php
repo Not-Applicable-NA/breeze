@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             // 学科カラムを追加
-            $table->foreignId('major_id')->after('password')->constrained();
+            $table->string('major')->after('password');
         });
     }
 
@@ -24,8 +24,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             // 学科カラムを削除
-            $table->dropForeign('users_major_id_foreign');
-            $table->dropColumn('major_id');
+            $table->dropColumn('major');
         });
     }
 };
