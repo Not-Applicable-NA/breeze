@@ -10,6 +10,10 @@ class Major extends Model
     use HasFactory;
 
     public function getAllMajors() {
-        return $this->all();
+        return $this::all();
+    }
+
+    public function getMajor($name) {
+        return $this->where('name', $name)->first();
     }
 }
