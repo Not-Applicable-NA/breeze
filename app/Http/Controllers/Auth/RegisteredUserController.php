@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Major;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -15,12 +16,23 @@ use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
+
+    private $major;
+
+    public function __construct() {
+        $this->major = new Major();
+    }
+
     /**
      * Display the registration view.
      */
     public function create(): View
     {
-        return view('auth.register');
+        $majors = $this->major->getAllMajors();
+        return view(
+            'auth.register',
+            compact('majors')
+        );
     }
 
     /**
@@ -34,12 +46,15 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'major' => ['required', 'string'],
         ]);
 
+        $major = $this->major->getMajor($request->major)->name;
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'major' => $major
         ]);
 
         event(new Registered($user));
