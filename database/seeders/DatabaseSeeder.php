@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             DepartmentSeeder::class,
             MajorSeeder::class,
-            ClassTypeSeeder::class
+            ClassTypeSeeder::class,
+            ClassNumberSeeder::class
         ]);
     }
 }
