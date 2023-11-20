@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('class_types', function (Blueprint $table) {
+        Schema::create('class_lists', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
+            $table->string('class');
             $table->foreignId('major_id')->constrained()->cascadeOnDelete();
         });
     }
@@ -23,10 +23,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // クラスタイプテーブルを削除
-        Schema::table('class_types', function (Blueprint $table) {
-            $table->dropForeign('class_types_major_id_foreign');
+        Schema::table('class_lists', function (Blueprint $table) {
+            $table->dropForeign('class_lists_major_id_foreign');
         });
-        Schema::dropIfExists('class_types');
+        Schema::dropIfExists('class_lists');
     }
 };
