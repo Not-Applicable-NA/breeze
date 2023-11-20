@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            // 学科カラムを追加
-            $table->string('major')->after('password');
+            // クラスカラムを追加
+            $table->string('class')->after('password');
         });
     }
 
@@ -23,8 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            // 学科カラムを削除
-            $table->dropColumn('major');
+            // クラスカラムを削除
+            $table->dropColumn('class');
         });
     }
 };
