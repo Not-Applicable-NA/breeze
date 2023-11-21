@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('majors', function (Blueprint $table) {
+        Schema::create('class_lists', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->foreignId('department_id')->constrained()->cascadeOnDelete();
+            $table->string('class');
+            $table->foreignId('major_id')->constrained()->cascadeOnDelete();
         });
     }
 
@@ -23,10 +23,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // 学科テーブルを削除
-        Schema::table('majors', function (Blueprint $table) {
-            $table->dropForeign('majors_department_id_foreign');
+        Schema::table('class_lists', function (Blueprint $table) {
+            $table->dropForeign('class_lists_major_id_foreign');
         });
-        Schema::dropIfExists('majors');
+        Schema::dropIfExists('class_lists');
     }
 };
