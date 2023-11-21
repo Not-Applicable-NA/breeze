@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\ClassList;
 use App\Models\Major;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -17,10 +18,11 @@ use Illuminate\View\View;
 class RegisteredUserController extends Controller
 {
 
-    private $major;
+    private $class;
 
-    public function __construct() {
-        $this->major = new Major();
+    public function __construct()
+    {
+        $this->class = new ClassList();
     }
 
     /**
@@ -28,11 +30,8 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        $majors = $this->major->getAllMajors();
-        return view(
-            'auth.register',
-            compact('majors')
-        );
+        $classes = $this->class->getAllClasses();
+        return view('auth.register', compact('classes'));
     }
 
     /**
@@ -46,15 +45,14 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'major' => ['required', 'string'],
+            'class' => ['required', 'string'],
         ]);
 
-        $major = $this->major->getMajor($request->major)->name;
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'major' => $major
+            'class' => $this->class->getClass($request->class)->id
         ]);
 
         event(new Registered($user));

@@ -18,4 +18,13 @@ class ClassList extends Model
         return $this->belongsTo(Major::class);
     }
 
+    public function getAllClasses()
+    {
+        return $this->all();
+    }
+
+    public function getClass($class) {
+        return $this->where('class', $class)->first();
+    }
+
 }
