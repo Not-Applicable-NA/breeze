@@ -9,6 +9,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class ClassList extends Model
 {
     use HasFactory;
+
+    /**
+     * モデルに関連付けるテーブル
+     */
+    protected $table = 'classes';
     
     /**
      * クラスが所属する学科を取得
@@ -16,6 +21,15 @@ class ClassList extends Model
     public function major(): BelongsTo
     {
         return $this->belongsTo(Major::class);
+    }
+
+    public function getAllClasses()
+    {
+        return $this->all();
+    }
+
+    public function getClass($class) {
+        return $this->where('name', $class)->first();
     }
 
 }
