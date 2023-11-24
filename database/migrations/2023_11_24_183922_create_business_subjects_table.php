@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('semester'); // 開講時期
             $table->string('periods'); // 開講日時
             $table->string('main_lecture_room'); //主教室
-            $table->foreignId('class_list_id')->constrained()->cascadeOnDelete(); // 対象クラス
+            $table->foreignId('class_id')->constrained()->cascadeOnDelete(); // 対象クラス
             $table->foreignId('teacher_id')->constrained()->cascadeOnDelete(); // 担当教員
             $table->text('note')->nullable(); // 備考
         });

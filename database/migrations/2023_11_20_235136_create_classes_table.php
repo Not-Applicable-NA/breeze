@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('class_lists', function (Blueprint $table) {
+        Schema::create('classes', function (Blueprint $table) {
             $table->id();
-            $table->string('class');
+            $table->string('name');
             $table->foreignId('major_id')->constrained()->cascadeOnDelete();
         });
     }
@@ -23,9 +23,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('class_lists', function (Blueprint $table) {
-            $table->dropForeign('class_lists_major_id_foreign');
+        Schema::table('classes', function (Blueprint $table) {
+            $table->dropForeign('classes_major_id_foreign');
         });
-        Schema::dropIfExists('class_lists');
+        Schema::dropIfExists('classes');
     }
 };
