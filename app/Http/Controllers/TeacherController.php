@@ -8,19 +8,19 @@ use Illuminate\View\View;
 
 class TeacherController extends Controller
 {
-    // private $subject;
+    private $teacher;
 
-    // public function __construct() {
-    //     $this->subject = new Subject();
-    // }
+    public function __construct() {
+        $this->teacher = new Teacher();
+    }
 
     /**
      * 教員一覧を表示
      */    
     public function show(Request $request): View
     {
-        // $subjects = $this->subject->getAllSubject();
-        return view('teachers');
+        $teachers = $this->teacher->getAllTeachers();
+        return view('teachers', compact('teachers'));
     }
 
     /**

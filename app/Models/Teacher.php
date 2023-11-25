@@ -16,4 +16,12 @@ class Teacher extends Model
         'email',
         'laboratory_no'
     ];
+
+    /**
+     * 全教員を取得
+     */
+    public function getAllTeachers()
+    {
+        return $this->all();
+    }
 }
