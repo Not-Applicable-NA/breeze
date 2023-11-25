@@ -26,7 +26,10 @@ Route::get('/dashboard', function () {
 
 Route::get('/subjects', [SubjectController::class, 'show'])->middleware(['auth', 'verified'])->name('subjects');
 
-Route::get('/teachers', [TeacherController::class, 'show'])->middleware(['auth', 'verified'])->name('teachers');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/teachers', [TeacherController::class, 'show'])->name('teachers');
+    Route::post('/teachers', [TeacherController::class, 'add'])->name('teachers.add');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
