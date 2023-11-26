@@ -16,4 +16,12 @@ class BusinessSubject extends Model
     {
         return $this->belongsToMany(Teacher::class);
     }
+
+    /**
+     * 全科目を取得
+     */
+    public function getAllSubjects()
+    {
+        return $this->all();
+    }
 }

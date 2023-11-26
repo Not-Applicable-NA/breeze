@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\Subject\SubjectController;
+use App\Http\Controllers\Subject\BusinessSubjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,7 +25,12 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/subjects', [SubjectController::class, 'show'])->middleware(['auth', 'verified'])->name('subjects');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/subjects', [SubjectController::class, 'redirect'])->name('subjects');
+    Route::controller(BusinessSubjectController::class)->group(function () {
+        Route::get('/business', 'show')->name('business');
+    });
+});
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/teachers', [TeacherController::class, 'show'])->name('teachers');
