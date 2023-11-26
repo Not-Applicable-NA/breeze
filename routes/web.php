@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/subjects', [SubjectController::class, 'show'])->middleware(['auth', 'verified'])->name('subjects');
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/teachers', [TeacherController::class, 'show'])->name('teachers');
+    Route::post('/teachers', [TeacherController::class, 'add'])->name('teachers.add');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
