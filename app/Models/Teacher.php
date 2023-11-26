@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Teacher extends Model
 {
@@ -16,6 +17,11 @@ class Teacher extends Model
         'email',
         'laboratory_no'
     ];
+    
+    public function businessSubjects(): BelongsToMany
+    {
+        return $this->belongsToMany(BusinessSubject::class);
+    }
 
     /**
      * 全教員を取得
