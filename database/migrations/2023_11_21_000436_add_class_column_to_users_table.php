@@ -24,8 +24,8 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             // クラスカラムを削除
-            $table->dropForeign('users_class_list_id_foreign');
-            $table->dropColumn('class_list_id');
+            $table->dropForeign('users_class_id_foreign');
+            $table->dropColumn('class_id');
         });
     }
 };
