@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ClassList extends Model
 {
@@ -21,6 +22,14 @@ class ClassList extends Model
     public function major(): BelongsTo
     {
         return $this->belongsTo(Major::class);
+    }
+
+    /**
+     * クラスに所属するユーザーを取得
+     */
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class);
     }
 
     public function getAllClasses()
