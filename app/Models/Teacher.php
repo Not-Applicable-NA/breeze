@@ -18,9 +18,9 @@ class Teacher extends Model
         'laboratory_no'
     ];
     
-    public function businessSubjects(): BelongsToMany
+    public function subjects(): BelongsToMany
     {
-        return $this->belongsToMany(BusinessSubject::class);
+        return $this->belongsToMany(Subject::class);
     }
 
     /**

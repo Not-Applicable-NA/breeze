@@ -6,12 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class BusinessSubject extends Model
+class Subject extends Model
 {
     use HasFactory;
 
     public $timestamps = false;
 
+    /**
+     * 教員モデルとのリレーション
+     */
     public function teachers(): BelongsToMany
     {
         return $this->belongsToMany(Teacher::class);

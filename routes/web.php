@@ -2,8 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TeacherController;
-use App\Http\Controllers\Subject\SubjectController;
-use App\Http\Controllers\Subject\BusinessSubjectController;
+use App\Http\Controllers\SubjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,10 +25,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/subjects', [SubjectController::class, 'redirect'])->name('subjects');
-    Route::controller(BusinessSubjectController::class)->group(function () {
-        Route::get('/business', 'show')->name('business');
-    });
+    Route::get('/subjects', [SubjectController::class, 'show'])->name('subjects');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
