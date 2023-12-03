@@ -21,6 +21,14 @@ class Subject extends Model
     }
 
     /**
+     * クラスとのリレーション
+     */
+    public function classes(): BelongsToMany
+    {
+        return $this->belongsToMany(ClassList::class);
+    }
+
+    /**
      * 全科目を取得
      */
     public function getAllSubjects()
