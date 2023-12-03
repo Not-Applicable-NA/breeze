@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         // 先端経営学科科目
-        Schema::create('business_subjects', function (Blueprint $table) {
+        Schema::create('subjects', function (Blueprint $table) {
             $table->id();
             $table->string('name'); // 科目名
             $table->integer('credits'); // 単位数
@@ -26,9 +26,7 @@ return new class extends Migration
             $table->integer('period_2')->nullable(); // 開講時限1
             $table->boolean('is_in_a_row_2')->nullable(); // 2コマ連続か
             $table->string('main_lecture_room'); //主教室
-            $table->foreignId('class_id')->constrained()->cascadeOnDelete(); // 対象クラス
-            $table->foreignId('teacher_id')->constrained()->cascadeOnDelete(); // 担当教員
-            $table->text('note')->nullable(); // 備考
+            $table->string('syllabus'); //シラバスのリンク
         });
     }
 
@@ -37,10 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('business_subjects', function (Blueprint $table) {
-            $table->dropForeign('business_subjects_class_id_foreign');
-            $table->dropForeign('business_subjects_teacher_id_foreign');
-        });
-        Schema::dropIfExists('business_subjects');
+        Schema::dropIfExists('subjects');
     }
 };
