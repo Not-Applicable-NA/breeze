@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\TakenSubjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +24,10 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/taken-subjects', [TakenSubjectController::class, 'show'])->name('taken-subjects');
+});
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/subjects', [SubjectController::class, 'show'])->name('subjects');
