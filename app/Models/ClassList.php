@@ -38,7 +38,7 @@ class ClassList extends Model
      */
     public function subjects(): BelongsToMany
     {
-        return $this->belongsToMany(Subject::class);
+        return $this->belongsToMany(Subject::class, 'class_subject', 'class_id', 'subject_id');
     }
 
     public function getAllClasses()

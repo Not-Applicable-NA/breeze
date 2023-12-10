@@ -15,6 +15,7 @@ class Subject extends Model
     protected $fillable = [
         'name',
         'credits',
+        'dividend_grade',
         'is_obligatory',
         'semester',
         'day_of_week_1',
@@ -40,7 +41,7 @@ class Subject extends Model
      */
     public function classes(): BelongsToMany
     {
-        return $this->belongsToMany(ClassList::class);
+        return $this->belongsToMany(ClassList::class, 'class_subject', 'subject_id', 'class_id');
     }
 
     /**

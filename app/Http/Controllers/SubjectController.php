@@ -7,6 +7,7 @@ use App\Models\Subject;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class SubjectController extends Controller
@@ -52,20 +53,41 @@ class SubjectController extends Controller
      */
     public function add(Request $request)
     {
-        dd($request);
-        // $request->validate([
-        //     'name' => ['required', 'string', 'max:255'],
-        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:'.Teacher::class],
-        //     'labno' => ['required', 'string']
-        // ]);
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'credits' => ['required', Rule::in([0, 1, 2, 4])],
+            'grade' => ['required', Rule::in([1, 2, 3, 4])],
+            'obligatory' => ['boolean'],
+            'semester' => ['required', Rule::in(['前期', '前期前半', '前期後半', '後期', '後期前半', '後期後半'])],
+            'dayofweek' => ['required', Rule::in(['月', '火', '水', '木', '金', '土', '日'])],
+            'period' => ['required', Rule::in([1, 2, 3, 4, 5, 6])],
+            'inarow' => ['boolean'],
+            'dayofweek2' => ['nullable', Rule::in(['月', '火', '水', '木', '金', '土', '日'])],
+            'period2' => ['nullable', Rule::in([1, 2, 3, 4, 5, 6])],
+            'inarow2' => ['nullable', 'boolean'],
+            'room' => ['required', 'string', 'max:255' ],
+            'syllabus' => ['required', 'string', 'max:255' ]
+        ]);
 
-        // Teacher::create([
-        //     'name' => $request->name,
-        //     'email' => $request->email,
-        //     'laboratory_no' => $request->labno,
-        // ]);
+        $subject = Subject::create([
+            'name' => $request->name,
+            'credits' => $request->credits,
+            'dividend_grade' => $request->grade,
+            'is_obligatory' => $request->obligatory ? true : false,
+            'semester' => $request->semester,
+            'day_of_week_1' => $request->dayofweek,
+            'period_1' => $request->period,
+            'is_in_a_row_1' => $request->inarow ? true : false,
+            'day_of_week_2' => $request->dayofweek2,
+            'period_2' => isset($request->dayofweek2) ? $request->period2 : null,
+            'is_in_a_row_2' => isset($request->dayofweek2) ? ($request->inarow2 ? true : false) : null,
+            'main_lecture_room' => $request->room,
+            'syllabus' => $request->syllabus
+        ]);
+        $subject->teachers()->syncWithoutDetaching($request->teacher);
+        $subject->classes()->syncWithoutDetaching($request->class);
 
-        // return redirect()->route('teachers');
+        return back();
     }
 
     // public function redirect()

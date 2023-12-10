@@ -26,8 +26,8 @@
 
                         <div class="mt-4 flex">
                             <x-input-label for="obligatory" :value="__('Obligatory subject')" />
-                                <input id="obligatory" type="checkbox" value="yes" class="ml-2 rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="obligatory">
-                            </label>
+                            <input id="obligatory" type="checkbox" name="obligatory" value="1" class="ml-2 rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                            <x-input-error :messages="$errors->get('obligatory')" class="ml-2" />
                         </div>
 
                         <div class="mt-4 flex w-full">
@@ -39,6 +39,7 @@
                                         <option value="{{ $credit }}">{{ $credit }}</option>
                                     @endforeach
                                 </select>
+                                <x-input-error :messages="$errors->get('credits')" class="mt-2" />
                             </div>
 
                             <div class="ml-2">
@@ -49,6 +50,7 @@
                                         <option value="{{ $grade }}">{{ $grade }}</option>
                                     @endforeach
                                 </select>
+                                <x-input-error :messages="$errors->get('grade')" class="mt-2" />
                             </div>
 
                             <div class="ml-2">
@@ -59,6 +61,7 @@
                                         <option value="{{ $semester }}">{{ $semester }}</option>
                                     @endforeach
                                 </select>
+                                <x-input-error :messages="$errors->get('semester')" class="mt-2" />
                             </div>
 
                             <div class="ml-2">
@@ -73,7 +76,7 @@
                             @foreach ($teachers as $teacher)
                                 <div>
                                     <label for="teacher_{{ $teacher->id }}">{{ $teacher->name }}</label>
-                                    <input id="teacher_{{ $teacher->id }}" type="checkbox" name="teacher[]" value="{{ $teacher->name }}" class="ml-2 rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                    <input id="teacher_{{ $teacher->id }}" type="checkbox" name="teacher[]" value="{{ $teacher->id }}" class="ml-2 rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
                                 </div>
                             @endforeach
                         </div>
@@ -83,7 +86,7 @@
                             <div class="flex">
                                 @foreach ($classes as $class)
                                     <div>
-                                        <input id="class_{{ $class->id }}" type="checkbox" name="class[]" value="{{ $class->name }}" class="ml-4 rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                        <input id="class_{{ $class->id }}" type="checkbox" name="class[]" value="{{ $class->id }}" class="ml-4 rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
                                         <label for="class_{{ $class->id }}" class="ml-2">{{ $class->name }}</label>
                                     </div>
                                 @endforeach
@@ -98,6 +101,7 @@
                                     @foreach ($dayOfWeeks as $dayOfWeek)
                                         <option value="{{ $dayOfWeek }}">{{ $dayOfWeek }}</option>
                                     @endforeach
+                                    <x-input-error :messages="$errors->get('dayofweek')" class="mt-2" />
                                 </select>
                             </div>
                             
@@ -108,14 +112,15 @@
                                     @foreach ($periods as $period)
                                         <option value="{{ $period }}">{{ $period }}</option>
                                     @endforeach
+                                    <x-input-error :messages="$errors->get('period')" class="mt-2" />
                                 </select>
                             </div>
                         </div>
 
                         <div class="mt-4 flex">
                             <x-input-label for="inarow" :value="__('In a row')" />
-                                <input id="inarow" type="checkbox" value="yes" class="ml-2 rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="inarow">
-                            </label>
+                            <input id="inarow" type="checkbox" name="inarow" value="1" class="ml-2 rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                            <x-input-error :messages="$errors->get('inarow')" class="ml-2" />
                         </div>
 
                         <div class="mt-4 w-full border-t border-t-white">
@@ -129,6 +134,7 @@
                                         @foreach ($dayOfWeeks as $dayOfWeek)
                                             <option value="{{ $dayOfWeek }}">{{ $dayOfWeek }}</option>
                                         @endforeach
+                                        <x-input-error :messages="$errors->get('dayofweek2')" class="mt-2" />
                                     </select>
                                 </div>
                                 
@@ -139,14 +145,15 @@
                                         @foreach ($periods as $period)
                                             <option value="{{ $period }}">{{ $period }}</option>
                                         @endforeach
+                                        <x-input-error :messages="$errors->get('period2')" class="mt-2" />
                                     </select>
                                 </div>
                             </div>
 
                             <div class="mt-4 flex">
                                 <x-input-label for="inarow2" :value="__('In a row')" />
-                                    <input id="inarow2" type="checkbox" value="yes" class="ml-2 rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="inarow2">
-                                </label>
+                                <input id="inarow2" type="checkbox" name="inarow2" value="1" class="ml-2 rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                <x-input-error :messages="$errors->get('inarow2')" class="ml-2" />
                             </div>
                         </div>
                         
