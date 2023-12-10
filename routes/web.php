@@ -31,6 +31,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/subjects', [SubjectController::class, 'show'])->name('subjects');
+    Route::post('/subjects', [SubjectController::class, 'add'])->name('subjects.add');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

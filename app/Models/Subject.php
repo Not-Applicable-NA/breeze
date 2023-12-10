@@ -12,6 +12,21 @@ class Subject extends Model
 
     public $timestamps = false;
 
+    protected $fillable = [
+        'name',
+        'credits',
+        'is_obligatory',
+        'semester',
+        'day_of_week_1',
+        'period_1',
+        'is_in_a_row_1',
+        'day_of_week_2',
+        'period_2',
+        'is_in_a_row_2',
+        'main_lecture_room',
+        'syllabus'
+    ];
+
     /**
      * 教員モデルとのリレーション
      */
