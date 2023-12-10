@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         // 科目と担当教員の中間テーブル
-        Schema::create('teacher_subjects', function (Blueprint $table) {
+        Schema::create('subject_teacher', function (Blueprint $table) {
             $table->id();
             $table->foreignId('teacher_id')->constrained()->cascadeOnDelete();
             $table->foreignId('subject_id')->constrained()->cascadeOnDelete();
@@ -24,10 +24,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('teacher_subjects', function (Blueprint $table) {
-            $table->dropForeign('teacher_subjects_teacher_id_foreign');
-            $table->dropForeign('teacher_subjects_subject_id_foreign');
+        Schema::table('subject_teacher', function (Blueprint $table) {
+            $table->dropForeign('subject_teacher_teacher_id_foreign');
+            $table->dropForeign('subject_teacher_subject_id_foreign');
         });
-        Schema::dropIfExists('teacher_subjects');
+        Schema::dropIfExists('subject_teacher');
     }
 };
