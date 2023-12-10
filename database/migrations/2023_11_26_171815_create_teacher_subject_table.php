@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // 科目と対象クラスの中間テーブル
-        Schema::create('class_subjects', function (Blueprint $table) {
+        // 科目と担当教員の中間テーブル
+        Schema::create('teacher_subject', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('teacher_id')->constrained()->cascadeOnDelete();
             $table->foreignId('subject_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('class_id')->nullable()->constrained()->cascadeOnDelete();
         });
     }
 
@@ -24,10 +24,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('class_subjects', function (Blueprint $table) {
-            $table->dropForeign('class_subjects_subject_id_foreign');
-            $table->dropForeign('class_subjects_class_id_foreign');
+        Schema::table('teacher_subject', function (Blueprint $table) {
+            $table->dropForeign('teacher_subject_teacher_id_foreign');
+            $table->dropForeign('teacher_subject_subject_id_foreign');
         });
-        Schema::dropIfExists('class_subjects');
+        Schema::dropIfExists('teacher_subject');
     }
 };
