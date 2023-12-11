@@ -24,6 +24,7 @@
                 @foreach ($classes as $class)
                     <option value="{{ $class->name }}">{{ $class->name }} --{{ $class->major->name }}--</option>
                 @endforeach
+                <x-input-error :messages="$errors->get('class')" class="mt-2" />
             </select>
         </div>
 
