@@ -30,8 +30,8 @@
                             <x-input-error :messages="$errors->get('obligatory')" class="ml-2" />
                         </div>
 
-                        <div class="mt-4 flex w-full">
-                            <div>
+                        <div class="mt-4 flex flex-wrap w-full">
+                            <div class="mr-2">
                                 <x-input-label for="credits" :value="__('Credits')" />
                                 <select name="credits" id="credits" class="mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" required autofocus>
                                     <option value="">---選択してください---</option>
@@ -42,7 +42,7 @@
                                 <x-input-error :messages="$errors->get('credits')" class="mt-2" />
                             </div>
 
-                            <div class="ml-2">
+                            <div class="mr-2">
                                 <x-input-label for="grade" :value="__('Dividend grade')" />
                                 <select name="grade" id="grade" class="mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" required autofocus>
                                     <option value="">---選択してください---</option>
@@ -53,7 +53,7 @@
                                 <x-input-error :messages="$errors->get('grade')" class="mt-2" />
                             </div>
 
-                            <div class="ml-2">
+                            <div class="mr-2">
                                 <x-input-label for="semester" :value="__('Semester')" />
                                 <select name="semester" id="semester" class="mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" required autofocus>
                                     <option value="">---選択してください---</option>
@@ -64,7 +64,7 @@
                                 <x-input-error :messages="$errors->get('semester')" class="mt-2" />
                             </div>
 
-                            <div class="ml-2">
+                            <div class="mr-2">
                                 <x-input-label for="room" :value="__('Main lecture room')" />
                                 <x-text-input id="room" class="block mt-1 w-full" type="text" name="room" required autofocus />
                                 <x-input-error :messages="$errors->get('room')" class="mt-2" />
@@ -73,28 +73,30 @@
 
                         <div class="mt-4">
                             <div class="mt-4">{{ __('Teachers in charge') }}</div>
-                            @foreach ($teachers as $teacher)
-                                <div>
-                                    <label for="teacher_{{ $teacher->id }}">{{ $teacher->name }}</label>
-                                    <input id="teacher_{{ $teacher->id }}" type="checkbox" name="teacher[]" value="{{ $teacher->id }}" class="ml-2 rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
-                                </div>
-                            @endforeach
+                            <div class="flex flex-wrap">
+                                @foreach ($teachers as $teacher)
+                                    <div class="mr-3 w-40">
+                                        <input id="teacher_{{ $teacher->id }}" type="checkbox" name="teacher[]" value="{{ $teacher->id }}" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                        <label for="teacher_{{ $teacher->id }}" class="ml-1">{{ $teacher->name }}</label>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
 
                         <div class="mt-4">
                             <div class="mt-4">{{ __('Target classes') }}</div>
-                            <div class="flex">
+                            <div class="flex flex-wrap">
                                 @foreach ($classes as $class)
-                                    <div>
-                                        <input id="class_{{ $class->id }}" type="checkbox" name="class[]" value="{{ $class->id }}" class="ml-4 rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
-                                        <label for="class_{{ $class->id }}" class="ml-2">{{ $class->name }}</label>
+                                    <div class="mr-3 w-12">
+                                        <input id="class_{{ $class->id }}" type="checkbox" name="class[]" value="{{ $class->id }}" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                        <label for="class_{{ $class->id }}" class="ml-1">{{ $class->name }}</label>
                                     </div>
                                 @endforeach
                             </div>
                         </div>
 
                         <div class="mt-4 flex w-full">
-                            <div>
+                            <div class="mr-2">
                                 <x-input-label for="dayofweek" :value="__('Day of week')" />
                                 <select name="dayofweek" id="dayofweek" class="mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" required autofocus>
                                     <option value="">---選択してください---</option>
@@ -105,7 +107,7 @@
                                 </select>
                             </div>
                             
-                            <div class="ml-2">
+                            <div class="mr-2">
                                 <x-input-label for="period" :value="__('Period')" />
                                 <select name="period" id="period" class="mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" required autofocus>
                                     <option value="">---選択してください---</option>
@@ -127,7 +129,7 @@
                             <h3 class="mt-4 text-xl">週2回授業がある場合はこちらも設定</h3>
                             
                             <div class="mt-4 flex w-full">    
-                                <div>
+                                <div class="mr-2">
                                     <x-input-label for="dayofweek2" :value="__('Day of week')" />
                                     <select name="dayofweek2" id="dayofweek2" class="mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" autofocus>
                                         <option value="">---選択してください---</option>
@@ -138,7 +140,7 @@
                                     </select>
                                 </div>
                                 
-                                <div class="ml-2">
+                                <div class="mr-2">
                                     <x-input-label for="period2" :value="__('Period')" />
                                     <select name="period2" id="period2" class="mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" autofocus>
                                         <option value="">---選択してください---</option>
