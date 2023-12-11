@@ -81,6 +81,7 @@
                                     </div>
                                 @endforeach
                             </div>
+                            <x-input-error :messages="$errors->get('teacher')" class="mt-2" />
                         </div>
 
                         <div class="mt-4">
@@ -93,6 +94,7 @@
                                     </div>
                                 @endforeach
                             </div>
+                            <x-input-error :messages="$errors->get('class')" class="mt-2" />
                         </div>
 
                         <div class="mt-4 flex w-full">
@@ -165,6 +167,62 @@
                             </x-primary-button>
                         </div>
                     </form>
+
+                    <table class="mt-4 w-full border-collapse text-center">
+                        <thead>
+                            <tr>
+                                <th class="p-2">科目名</th>
+                                <th class="p-2">単位数</th>
+                                <th class="p-2">配当年次</th>
+                                <th class="p-2">必修科目</th>
+                                <th class="p-2">開講学期</th>
+                                <th class="p-2">開講日時</th>
+                                <th class="p-2">主教室</th>
+                                <th class="p-2">担当教員</th>
+                                <th class="p-2">対象クラス</th>
+                                <th class="p-2">シラバス</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ( $subjects as $subject )
+                                <tr>
+                                    <td class="border-t p-2">{{ $subject->name }}</td>
+                                    <td class="border-t p-2">{{ $subject->credits }}単位</td>
+                                    <td class="border-t p-2">{{ $subject->dividend_grade }}年</td>
+                                    <td class="border-t p-2">
+                                        @if ($subject->is_obligatory)
+                                            ○
+                                        @endif
+                                    </td>
+                                    <td class="border-t p-2">{{ $subject->semester }}</td>
+                                    <td class="border-t p-2">
+                                        {{ $subject->day_of_week_1 }}{{ $subject->period_1 }}@if ($subject->is_in_a_row_1), {{ $subject->period_1+1 }}@endif
+                                        @if ( $subject->day_of_week_2)
+                                            <br> {{ $subject->day_of_week_2 }}{{ $subject->period_2 }}@if ($subject->is_in_a_row_2), {{ $subject->period_2+1 }}@endif
+                                        @endif
+                                    </td>
+                                    <td class="border-t p-2">{{ $subject->main_lecture_room }}</td>
+                                    <td class="border-t p-2">
+                                        @foreach ( $subject->teachers as $teacherInCharge )
+                                            {{ $teacherInCharge->name }}<br>
+                                        @endforeach
+                                    </td>
+                                    <td class="border-t p-2">
+                                        @if ($subject->classes->isNotEmpty())
+                                            @foreach ( $subject->classes as $targetCasses )
+                                                {{ $targetCasses->name }}<br>
+                                            @endforeach
+                                        @else
+                                            @foreach ( $classes as $class )
+                                                {{ $class->name }}<br>
+                                            @endforeach
+                                        @endif
+                                    </td>
+                                    <td class="border-t p-2">{{ $subject->syllabus }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

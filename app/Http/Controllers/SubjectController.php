@@ -21,7 +21,7 @@ class SubjectController extends Controller
     /**
      * 科目一覧を表示
      */    
-    public function show(Request $request): View
+    public function show(): View
     {
         $user = Auth::user();
         $subjects = $this->subject->getAllSubjects();
@@ -66,7 +66,11 @@ class SubjectController extends Controller
             'period2' => ['nullable', Rule::in([1, 2, 3, 4, 5, 6])],
             'inarow2' => ['nullable', 'boolean'],
             'room' => ['required', 'string', 'max:255' ],
-            'syllabus' => ['required', 'string', 'max:255' ]
+            'syllabus' => ['required', 'string', 'max:255' ],
+            'teacher' => ['required'],
+            'teacher.*' => ['required', 'integer'],
+            'class' => ['nullable'],
+            'class.*' => ['required', 'integer']
         ]);
 
         $subject = Subject::create([
