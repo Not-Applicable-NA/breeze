@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TeacherController;
-use App\Http\Controllers\SubjectController;
-use App\Http\Controllers\TakenSubjectController;
+use App\Http\Controllers\subjects\SubjectController;
+use App\Http\Controllers\subjects\TakenController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,13 +25,13 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/taken-subjects', [TakenSubjectController::class, 'show'])->name('taken-subjects');
-});
-
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/subjects', [SubjectController::class, 'show'])->name('subjects');
-    Route::post('/subjects', [SubjectController::class, 'add'])->name('subjects.add');
+Route::middleware(['auth', 'verified'])->prefix('subjects')->group(function () {
+    Route::get('/', [SubjectController::class, 'show'])->name('subjects');
+    Route::post('/', [SubjectController::class, 'add'])->name('subjects.add');
+    Route::controller(TakenController::class)->name('subjects.')->group(function () {
+        Route::get('/taken', 'show')->name('taken');
+        Route::post('/taken', 'add')->name('taken.add');
+    });
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

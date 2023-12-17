@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\subjects;
 
+use App\Http\Controllers\Controller;
 use App\Models\ClassList;
 use App\Models\Subject;
 use App\Models\Teacher;
@@ -35,7 +36,7 @@ class SubjectController extends Controller
         $dayOfWeeks = ['月', '火', '水', '木', '金', '土', '日'];
         $periods = [1, 2, 3, 4, 5, 6];
         
-        return view('subjects', compact(
+        return view('subjects.subjects', compact(
             'subjects',
             'user',
             'credits',
