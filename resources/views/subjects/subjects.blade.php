@@ -241,6 +241,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            <x-input-error :messages="$errors->get('subject')" class="mt-2" />
                         </form>
                     </div>
                 </div>

@@ -45,6 +45,14 @@ class Subject extends Model
     }
 
     /**
+     * ユーザーとのリレーション
+     */
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'subject_user', 'subject_id', 'user_id');
+    }
+
+    /**
      * 全科目を取得
      */
     public function getAllSubjects()
