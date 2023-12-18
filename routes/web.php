@@ -30,6 +30,8 @@ Route::middleware(['auth', 'verified'])->prefix('subjects')->group(function () {
     Route::post('/', [SubjectController::class, 'add'])->name('subjects.add');
     Route::get('/edit/{id}', [SubjectController::class, 'edit'])->name('subjects.edit');
     Route::patch('/edit/{id}', [SubjectController::class, 'store'])->name('subjects.edit.store');
+    Route::get('/delete/{id}', [SubjectController::class, 'deleteConfirm'])->name('subjects.delete');
+    Route::delete('/delete/{id}', [SubjectController::class, 'delete'])->name('subjects.delete.confirm');
     Route::controller(TakenController::class)->name('subjects.')->group(function () {
         Route::get('/taken', 'show')->name('taken');
         Route::post('/taken', 'add')->name('taken.add');

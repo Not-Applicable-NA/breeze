@@ -197,6 +197,7 @@
                                         <th class="p-2">対象クラス</th>
                                         <th class="p-2">シラバス</th>
                                         <th class="p-2"></th>
+                                        <th class="p-2"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -240,8 +241,15 @@
                                             <td class="border-t p-2">{{ $subject->syllabus }}</td>
                                             <td class="border-t p-2">
                                                 <div class="flex items-center">
-                                                    <a href="{{ route('subjects.edit', ['id' => $subject->id]) }}" class="'inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
+                                                    <a href="{{ route('subjects.edit', ['id' => $subject->id]) }}" class="'inline-flex items-center px-4 py-2 bg-slate-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
                                                         {{ __('Edit subject') }}
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td class="border-t p-2">
+                                                <div class="flex items-center">
+                                                    <a href="{{ route('subjects.delete', ['id' => $subject->id]) }}" class="'inline-flex items-center px-4 py-2 bg-slate-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
+                                                        {{ __('Delete subject') }}
                                                     </a>
                                                 </div>
                                             </td>

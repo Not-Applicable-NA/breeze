@@ -159,7 +159,6 @@ class SubjectController extends Controller
         ]);
 
         $subject = Subject::find($request->subjectId);
-        
 
         $subject->update([
             'name' => $request->name,
@@ -178,6 +177,33 @@ class SubjectController extends Controller
         ]);
         $subject->teachers()->sync($request->teacher);
         $subject->classes()->sync($request->class);
+
+        return redirect()->route('subjects');
+    }
+
+    /**
+     * 削除確認画面を表示
+     */    
+    public function deleteConfirm($subjectId): View
+    {
+        $user = Auth::user();
+        $subject = $this->subject->getSubject($subjectId);
+        if (!$subject) {
+            abort(500);
+        }
+        return view('subjects.delete', compact(
+            'subject',
+            'user'
+        ));
+    }
+
+    /**
+     * 科目を削除
+     */
+    public function delete(Request $request)
+    {
+        $subject = Subject::find($request->subjectId);
+        $subject->delete();
 
         return redirect()->route('subjects');
     }
