@@ -59,4 +59,12 @@ class Subject extends Model
     {
         return $this->all();
     }
+
+    /**
+     * 科目を取得
+     */
+    public function getSubject($subjectId)
+    {
+        return $this->find($subjectId);
+    }
 }

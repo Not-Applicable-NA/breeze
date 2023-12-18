@@ -28,6 +28,8 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth', 'verified'])->prefix('subjects')->group(function () {
     Route::get('/', [SubjectController::class, 'show'])->name('subjects');
     Route::post('/', [SubjectController::class, 'add'])->name('subjects.add');
+    Route::get('/edit/{id}', [SubjectController::class, 'edit'])->name('subjects.edit');
+    Route::patch('/edit/{id}', [SubjectController::class, 'store'])->name('subjects.edit.store');
     Route::controller(TakenController::class)->name('subjects.')->group(function () {
         Route::get('/taken', 'show')->name('taken');
         Route::post('/taken', 'add')->name('taken.add');
