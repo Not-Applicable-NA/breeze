@@ -184,7 +184,7 @@ class SubjectController extends Controller
     /**
      * 削除確認画面を表示
      */    
-    public function deleteConfirm($subjectId): View
+    public function delete($subjectId): View
     {
         $user = Auth::user();
         $subject = $this->subject->getSubject($subjectId);
@@ -200,7 +200,7 @@ class SubjectController extends Controller
     /**
      * 科目を削除
      */
-    public function delete(Request $request)
+    public function deleteConfirm(Request $request)
     {
         $subject = Subject::find($request->subjectId);
         $subject->delete();

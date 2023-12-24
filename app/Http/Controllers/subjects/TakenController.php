@@ -34,4 +34,12 @@ class TakenController extends Controller
         $user->subjects()->syncWithoutDetaching($request->subject);
         return redirect()->route('subjects.taken');
     }
+
+    public function delete(Request $request)
+    {
+        $user = User::find(Auth::user()->id);
+        $user->subjects()->detach($request->subjectId);
+
+        return back();
+    }
 }

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Subject delete confirm') }} (id:{{ $subject->id }})
+            {{ __('Subject delete confirm') }}
         </h2>
     </x-slot>
 
@@ -16,7 +16,7 @@
                         </h2>
                     </div>
                     <div class="border mt-4 p-4 rounded dark:border-gray-700 bg-slate-800">
-                        <form method="POST" action="{{ route('subjects.delete.confirm', ['id' => $subject->id]) }}">
+                        <form method="POST" action="{{ route('subjects.delete.confirm') }}">
                             @csrf
                             @method('delete')
 

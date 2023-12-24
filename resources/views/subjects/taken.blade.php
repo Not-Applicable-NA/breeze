@@ -30,15 +30,13 @@
                                 <th class="p-2">担当教員</th>
                                 <th class="p-2">対象クラス</th>
                                 <th class="p-2">シラバス</th>
+                                <th class="p-2"></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ( $subjects as $subject )
                                 <tr>
-                                    <td class="border-t p-2">
-                                        <input id="subject_{{ $subject->id }}" type="checkbox" name="subject[]" value="{{ $subject->id }}" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
-                                        <label for="subject_{{ $subject->id }}" class="ml-1">{{ $subject->name }}</label>
-                                    </td>
+                                    <td class="border-t p-2">{{ $subject->name }}</td>
                                     <td class="border-t p-2">{{ $subject->credits }}単位</td>
                                     <td class="border-t p-2">{{ $subject->dividend_grade }}年</td>
                                     <td class="border-t p-2">
@@ -71,6 +69,18 @@
                                         @endif
                                     </td>
                                     <td class="border-t p-2">{{ $subject->syllabus }}</td>
+                                    <td class="border-t p-2">
+                                        <div class="flex items-center">
+                                            <form method="POST" action="{{ route('subjects.taken.delete') }}">
+                                                @csrf
+                                                @method('delete')
+                                                <input type="hidden" name="subjectId" value="{{ $subject->id }}" />
+                                                <button type="submit" class="'inline-flex items-center px-4 py-2 bg-slate-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
+                                                    {{ __('Delete subject') }}
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
