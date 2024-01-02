@@ -30,4 +30,12 @@ class Teacher extends Model
     {
         return $this->all();
     }
+
+    /**
+     * 教員を取得
+     */
+    public function getTeacher($teacherId)
+    {
+        return $this->find($teacherId);
+    }
 }
