@@ -32,7 +32,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/teachers/{id}', [TeacherController::class, 'edit'])->name('teachers.edit');
     Route::patch('/teachers/{id}', [TeacherController::class, 'store'])->name('teachers.edit.store');
     Route::get('/teachers/delete/{id}', [TeacherController::class, 'delete'])->name('teachers.delete');
-    Route::delete('/teachers/delete/delete', [TeacherController::class, 'deleteConfirm'])->name('teachers.delete.confirm');
+    Route::delete('/teachers/delete', [TeacherController::class, 'deleteConfirm'])->name('teachers.delete.confirm');
 });
 
 Route::middleware('auth')->group(function () {

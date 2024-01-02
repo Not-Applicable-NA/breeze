@@ -81,27 +81,24 @@ class TeacherController extends Controller
     /**
      * 削除確認画面を表示
      */    
-    public function delete($subjectId): View
+    public function delete($teacherId): View
     {
-        $user = Auth::user();
-        $subject = $this->subject->getSubject($subjectId);
-        if (!$subject) {
+        $teacher = $this->teacher->getTeacher($teacherId);
+        if (!$teacher) {
             abort(500);
         }
-        return view('subjects.delete', compact(
-            'subject',
-            'user'
-        ));
+        
+        return view('teachers.delete', compact('teacher'));
     }
 
     /**
-     * 科目を削除
+     * 教員を削除
      */
     public function deleteConfirm(Request $request)
     {
-        $subject = Subject::find($request->subjectId);
-        $subject->delete();
+        $teacher = Teacher::find($request->teacherId);
+        $teacher->delete();
 
-        return redirect()->route('subjects');
+        return redirect()->route('teachers');
     }
 }
