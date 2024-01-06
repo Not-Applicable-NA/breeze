@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\subjects\SubjectController;
 use App\Http\Controllers\subjects\TakenController;
@@ -47,6 +48,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/teachers/{id}', [TeacherController::class, 'store'])->name('teachers.edit.store');
     Route::get('/teachers/delete/{id}', [TeacherController::class, 'delete'])->name('teachers.delete');
     Route::delete('/teachers/delete', [TeacherController::class, 'deleteConfirm'])->name('teachers.delete.confirm');
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/semester', [SemesterController::class, 'show'])->name('semester');
+    Route::patch('/semester', [SemesterController::class, 'store'])->name('semester.store');
 });
 
 Route::middleware('auth')->group(function () {
