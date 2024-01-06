@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -21,7 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'major'
+        'class_id',
     ];
 
     /**
@@ -43,4 +45,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * ユーザーの所属クラスを取得
+     */
+    public function class(): BelongsTo
+    {
+        return $this->belongsTo(ClassList::class);
+    }
+
+    /**
+     * ユーザーの履修科目を取得
+     */
+    public function subjects(): BelongsToMany
+    {
+        return $this->belongsToMany(Subject::class, 'subject_user', 'user_id', 'subject_id');
+    }
 }

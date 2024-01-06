@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            // 学科カラムを追加
-            $table->string('major')->after('password');
+        Schema::create('classes', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->foreignId('major_id')->constrained()->cascadeOnDelete();
         });
     }
 
@@ -22,9 +23,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            // 学科カラムを削除
-            $table->dropColumn('major');
+        Schema::table('classes', function (Blueprint $table) {
+            $table->dropForeign('classes_major_id_foreign');
         });
+        Schema::dropIfExists('classes');
     }
 };
