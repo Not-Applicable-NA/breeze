@@ -180,7 +180,7 @@
                             
                             <div class="flex items-center justify-end">
                                 <x-primary-button class="ml-3">
-                                    {{ __('Register subject') }}
+                                    登録
                                 </x-primary-button>
                             </div>
                             <table class="mt-4 w-full border-collapse text-center">
@@ -240,16 +240,16 @@
                                             </td>
                                             <td class="border-t p-2">{{ $subject->syllabus }}</td>
                                             <td class="border-t p-2">
-                                                <div class="flex items-center">
+                                                <div class="flex justify-center items-center">
                                                     <a href="{{ route('subjects.edit', ['id' => $subject->id]) }}" class="'inline-flex items-center px-4 py-2 bg-slate-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
-                                                        {{ __('Edit subject') }}
+                                                        編集
                                                     </a>
                                                 </div>
                                             </td>
                                             <td class="border-t p-2">
-                                                <div class="flex items-center">
+                                                <div class="flex justify-center items-center">
                                                     <a href="{{ route('subjects.delete', ['id' => $subject->id]) }}" class="'inline-flex items-center px-4 py-2 bg-slate-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150'">
-                                                        {{ __('Delete subject') }}
+                                                        削除
                                                     </a>
                                                 </div>
                                             </td>

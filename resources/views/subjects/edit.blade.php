@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Subject edit') }} (id:{{ $subject->id }})
+            {{ __('Subject edit') }} ({{ $subject->name }})
         </h2>
     </x-slot>
 
@@ -221,7 +221,7 @@
                             
                             <div class="flex items-center justify-end mt-4">
                                 <x-primary-button class="ml-3">
-                                    {{ __('Store subject') }}
+                                    保存
                                 </x-primary-button>
                             </div>
                         </form>
