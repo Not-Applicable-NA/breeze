@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <script>
                         let calendarApiKey = "{{ env('GOOGLE_CALENDAR_API_KEY') }}";
-                        let calendarId = "{{ env('GOOGLE_CALENDAR_ID') }}";
+                        let calendarId = "{{ $calendarId }}";
                     </script>
                     <x-fullcalendar />
                 </div>
