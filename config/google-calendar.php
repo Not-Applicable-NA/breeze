@@ -13,7 +13,7 @@ return [
             /*
              * Path to the json file containing the credentials.
              */
-            'credentials_json' => storage_path('/app/json/macro-mender-353308-8b3221d42aff.json'),
+            'credentials_json' => storage_path('app/json/macro-mender-353308-5fd545f73498.json'),
         ],
 
         /*
