@@ -21,9 +21,4 @@ class Semester extends Model
         'second_second_half_start',
         'second_end'
     ];
-
-    public function getSemester()
-    {
-        return $this->first();
-    }
 }

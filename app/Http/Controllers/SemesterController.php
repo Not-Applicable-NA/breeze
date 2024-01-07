@@ -8,18 +8,13 @@ use Illuminate\View\View;
 
 class SemesterController extends Controller
 {
-    private $semester;
-
-    public function __construct() {
-        $this->semester = new Semester();
-    }
 
     /**
      * 学期情報を表示
      */    
     public function show(Request $request): View
     {
-        $semester = $this->semester->getSemester();
+        $semester = Semester::first();
         return view('semester', compact('semester'));
     }
 
