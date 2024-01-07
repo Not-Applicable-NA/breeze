@@ -18,10 +18,11 @@ class TakenController extends Controller
     {
         $user = User::find(Auth::user()->id);
         $subjects = $user->subjects;
+        $dayOfWeeks = ['日', '月', '火', '水', '木', '金', '土'];
         $classes = ClassList::where(
             'major_id', '=', $user->class->major->id
         )->get();
-        return view('subjects.taken', compact('subjects', 'classes'));
+        return view('subjects.taken', compact('subjects', 'dayOfWeeks', 'classes'));
     }
 
     public function add(Request $request)
