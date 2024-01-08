@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('google_id')->after('id');
             $table->dropColumn('password');
             $table->string('google_access_token')->after('remember_token');
-            $table->string('google_refresh_token')->after('google_access_token');
+            $table->string('google_refresh_token')->after('google_access_token')->nullable();
         });
     }
 
