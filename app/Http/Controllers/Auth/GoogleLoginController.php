@@ -4,40 +4,67 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Google\Service\Calendar;
+use Google\Service\Oauth2;
+use Google_Client;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Http\Request;
 
 class GoogleLoginController extends Controller
 {
+    private Google_Client $client;
+
+    public function __construct() {
+        $this->client = new Google_Client();
+        $this->client->setApplicationName('Google Calendar API');
+        $this->client->setScopes([Calendar::CALENDAR_EVENTS, Oauth2::USERINFO_PROFILE, Oauth2::USERINFO_EMAIL, Oauth2::OPENID]);
+        $this->client->setAuthConfig(storage_path('app/google-calendar/oauth-credentials.json'));
+        $this->client->setAccessType('offline');
+        $this->client->setRedirectUri(env('GOOGLE_REDIRECT_URI'));
+    }
+
     // OAuthプロバイダへリダイレクト
     public function redirectToGoogle()
     {
-        return Socialite::driver('google')
-            ->scopes(['https://www.googleapis.com/auth/calendar.events'])
-            ->with(['access_type' => 'offline'])
-            ->redirect();
+        return redirect($this->client->createAuthUrl());
     }
 
     // 認証後コールバック
-    public function handleGoogleCallback()
+    public function handleGoogleCallback(Request $request)
     {
         try {
-            $googleUser = Socialite::driver('google')->user();
+            $tokenPath = storage_path('app/google-calendar/oauth-token.json');
+            if (file_exists($tokenPath)) {
+                $accessToken = json_decode(file_get_contents($tokenPath), true);
+                $this->client->setAccessToken($accessToken);
+            }
+
+            if ($this->client->isAccessTokenExpired()) {
+                if ($this->client->getRefreshToken()) {
+                    $this->client->fetchAccessTokenWithRefreshToken($this->client->getRefreshToken());
+                } else {
+                    $authCode = $request->code;
+                    $accessToken = $this->client->fetchAccessTokenWithAuthCode($authCode);
+                    $this->client->setAccessToken($accessToken);
+                }
+                file_put_contents($tokenPath, json_encode($this->client->getAccessToken()));
+            }
+            
+            $OAuthService = new Oauth2($this->client);
+            $userInfo = $OAuthService->userinfo_v2_me->get();
+            $token = $this->client->getAccessToken();
 
             $user = User::updateOrCreate(
-                [ 'google_id' => $googleUser->getId() ],
+                [ 'google_id' => $userInfo->getId() ],
                 [
-                    'name' => $googleUser->getName(),
-                    'email' => $googleUser->getEmail(),
-                    'google_access_token' => $googleUser->token,
-                    'google_refresh_token' => $googleUser->refreshToken
+                    'name' => $userInfo->getName(),
+                    'email' => $userInfo->getEmail(),
+                    'google_access_token' => $token['access_token'],
+                    'google_refresh_token' => $this->client->getRefreshToken()
                 ]
             );
 
             Auth::login($user);
-
-            file_put_contents(storage_path('app/google-calendar/oauth-token.json'), json_encode($googleUser));
 
             if (!$user->class) {
                 session()->flash('flash_message', '所属クラスを設定してください');
