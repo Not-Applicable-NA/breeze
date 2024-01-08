@@ -13,7 +13,10 @@ class GoogleLoginController extends Controller
     // OAuthプロバイダへリダイレクト
     public function redirectToGoogle()
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')
+            ->scopes(['https://www.googleapis.com/auth/calendar.events'])
+            ->with(['access_type' => 'offline'])
+            ->redirect();
     }
 
     // 認証後コールバック
@@ -33,6 +36,8 @@ class GoogleLoginController extends Controller
             );
 
             Auth::login($user);
+
+            file_put_contents(storage_path('app/google-calendar/oauth-token.json'), json_encode($googleUser));
 
             if (!$user->class) {
                 session()->flash('flash_message', '所属クラスを設定してください');

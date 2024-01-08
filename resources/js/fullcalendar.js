@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let calendar = new Calendar(calendarEl, {
         plugins: [googleCalendarPlugin],
         googleCalendarApiKey: calendarApiKey,
-        initialView: 'timeGridWeek',
+        initialView: 'dayGridMonth',
         locale: 'ja',
         events: {
             googleCalendarId: calendarId
