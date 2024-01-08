@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             // クラスカラムを追加
-            $table->foreignId('class_id')->after('password')->constrained()->cascadeOnDelete();
+            $table->foreignId('class_id')->after('password')->nullable()->constrained()->cascadeOnDelete();
         });
     }
 

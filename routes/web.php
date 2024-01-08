@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\GoogleLoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\subjects\SubjectController;
@@ -20,6 +21,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('auth/google', [GoogleLoginController::class, 'redirectToGoogle'])->name('google.auth');
+Route::get('auth/google/callback', [GoogleLoginController::class, 'handleGoogleCallback']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
