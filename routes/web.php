@@ -7,6 +7,7 @@ use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\subjects\SubjectController;
 use App\Http\Controllers\subjects\TakenController;
+use App\Http\Middleware\belongClassIsSet;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,7 +32,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'show'])->name('dashboard');
 });
 
-Route::middleware(['auth', 'verified'])->prefix('subjects')->group(function () {
+Route::middleware(['auth', 'verified', belongClassIsSet::class])->prefix('subjects')->group(function () {
     Route::get('/', [SubjectController::class, 'show'])->name('subjects');
     Route::post('/', [SubjectController::class, 'add'])->name('subjects.add');
     Route::get('/edit/{id}', [SubjectController::class, 'edit'])->name('subjects.edit');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\ClassList;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,13 +12,23 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+    
+    private $class;
+
+    public function __construct()
+    {
+        $this->class = new ClassList();
+    }
+
     /**
      * Display the user's profile form.
      */
     public function edit(Request $request): View
     {
+        $classes = $this->class->getAllClasses();
         return view('profile.edit', [
             'user' => $request->user(),
+            'classes' => $classes
         ]);
     }
 

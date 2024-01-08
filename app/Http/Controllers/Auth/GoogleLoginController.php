@@ -34,7 +34,13 @@ class GoogleLoginController extends Controller
 
             Auth::login($user);
 
-            return redirect()->route('dashboard');
+            if (!$user->class) {
+                session()->flash('flash_message', '所属クラスを設定してください');
+                return redirect()->route('profile.edit');
+            } else {
+                return redirect()->route('dashboard');
+            }
+            
         } catch (\Exception $e) {
             dd($e->getMessage());
         }
