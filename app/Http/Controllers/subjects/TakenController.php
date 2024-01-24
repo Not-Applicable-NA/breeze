@@ -64,27 +64,9 @@ class TakenController extends Controller
         $reminders->setOverrides([$reminder1, $reminder2]);
         $reminders->setUseDefault(false);
         foreach ($subjects as $subject) {
-            $semetserStartDt = null;
-            $semetserEndDt = null;
-            if ($subject->semester == '前期') {
-                $semetserStartDt = new Carbon(Semester::first()->first_start);
-                $semetserEndDt = new Carbon(Semester::first()->first_end);
-            } elseif ($subject->semester == '前期前半') {
-                $semetserStartDt = new Carbon(Semester::first()->first_start);
-                $semetserEndDt = new Carbon(Semester::first()->first_first_half_end);
-            } elseif ($subject->semester == '前期後半') {
-                $semetserStartDt = new Carbon(Semester::first()->first_second_half_start);
-                $semetserEndDt = new Carbon(Semester::first()->first_end);
-            } elseif ($subject->semester == '後期') {
-                $semetserStartDt = new Carbon(Semester::first()->second_start);
-                $semetserEndDt = new Carbon(Semester::first()->second_end);
-            } elseif ($subject->semester == '後期前半') {
-                $semetserStartDt = new Carbon(Semester::first()->second_start);
-                $semetserEndDt = new Carbon(Semester::first()->second_first_half_end);
-            } elseif ($subject->semester == '後期後半') {
-                $semetserStartDt = new Carbon(Semester::first()->second_second_half_start);
-                $semetserEndDt = new Carbon(Semester::first()->second_end);
-            } else {
+            $semetserStartDt = $this->getSemetserStartDt($subject->semester);
+            $semetserEndDt = $this->getSemetserEndDt($subject->semester);
+            if (!$semetserStartDt || !$semetserEndDt) {
                 abort(500);
             }
 
@@ -111,6 +93,42 @@ class TakenController extends Controller
                 }
                 $dt->addDay();
             }
+        }
+    }
+
+    private function getSemetserStartDt($semester): ?Carbon {
+        if ($semester == '前期') {
+            return new Carbon(Semester::first()->first_start);
+        } elseif ($semester == '前期前半') {
+            return new Carbon(Semester::first()->first_start);
+        } elseif ($semester == '前期後半') {
+            return new Carbon(Semester::first()->first_second_half_start);
+        } elseif ($semester == '後期') {
+            return new Carbon(Semester::first()->second_start);
+        } elseif ($semester == '後期前半') {
+            return new Carbon(Semester::first()->second_start);
+        } elseif ($semester == '後期後半') {
+            return new Carbon(Semester::first()->second_second_half_start);
+        } else {
+            return null;
+        }
+    }
+
+    private function getSemetserEndDt($semester): ?Carbon {
+        if ($semester == '前期') {
+            return new Carbon(Semester::first()->first_end);
+        } elseif ($semester == '前期前半') {
+            return new Carbon(Semester::first()->first_first_half_end);
+        } elseif ($semester == '前期後半') {
+            return new Carbon(Semester::first()->first_end);
+        } elseif ($semester == '後期') {
+            return new Carbon(Semester::first()->second_end);
+        } elseif ($semester == '後期前半') {
+            return new Carbon(Semester::first()->second_first_half_end);
+        } elseif ($semester == '後期後半') {
+            return new Carbon(Semester::first()->second_end);
+        } else {
+            return null;
         }
     }
 
