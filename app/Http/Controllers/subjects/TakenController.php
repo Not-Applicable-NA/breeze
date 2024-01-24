@@ -5,6 +5,7 @@ namespace App\Http\Controllers\subjects;
 use App\Http\Controllers\Controller;
 use App\Models\ClassList;
 use App\Models\Semester;
+use App\Models\Subject;
 use App\Models\User;
 use Carbon\Carbon;
 use Google\Service\Calendar\EventReminder;
@@ -46,6 +47,17 @@ class TakenController extends Controller
 
     public function delete(Request $request)
     {
+        $subject = Subject::find($request->subjectId);
+        $semetserStartDt = $this->getSemetserStartDt($subject->semester);
+        $semetserEndDt = $this->getSemetserEndDt($subject->semester);
+        if (!$semetserStartDt || !$semetserEndDt) {
+            abort(500);
+        }
+        foreach (Event::get(startDateTime: $semetserStartDt, endDateTime: $semetserEndDt->addDay()) as $event) {
+            if ($event->name === $subject->name) {
+                $event->delete();
+            }
+        }
         $user = User::find(Auth::user()->id);
         $user->subjects()->detach($request->subjectId);
 
