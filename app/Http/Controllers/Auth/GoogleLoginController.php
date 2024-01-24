@@ -46,6 +46,10 @@ class GoogleLoginController extends Controller
                     $authCode = $request->code;
                     $accessToken = $this->client->fetchAccessTokenWithAuthCode($authCode);
                     $this->client->setAccessToken($accessToken);
+
+                    if (array_key_exists('error', $accessToken)) {
+                        throw new \Exception(join(', ', $accessToken));
+                    }
                 }
                 file_put_contents($tokenPath, json_encode($this->client->getAccessToken()));
             }
