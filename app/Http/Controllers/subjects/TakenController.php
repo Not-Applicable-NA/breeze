@@ -5,7 +5,6 @@ namespace App\Http\Controllers\subjects;
 use App\Http\Controllers\Controller;
 use App\Models\ClassList;
 use App\Models\Semester;
-use App\Models\Subject;
 use App\Models\User;
 use Carbon\Carbon;
 use Google\Service\Calendar\EventReminder;
