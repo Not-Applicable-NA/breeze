@@ -39,17 +39,18 @@ class GoogleLoginController extends Controller
                 $this->client->setAccessToken($accessToken);
             }
 
-            if ($this->client->isAccessTokenExpired()) {
-                if ($this->client->getRefreshToken()) {
-                    $this->client->fetchAccessTokenWithRefreshToken($this->client->getRefreshToken());
-                } else {
-                    $authCode = $request->code;
-                    $accessToken = $this->client->fetchAccessTokenWithAuthCode($authCode);
-                    $this->client->setAccessToken($accessToken);
+            if ($this->client->isAccessTokenExpired() && $this->client->getRefreshToken()) {
+                $accessToken = $this->client->fetchAccessTokenWithRefreshToken($this->client->getRefreshToken());
+                $this->client->setAccessToken($accessToken);
+            }
 
-                    if (array_key_exists('error', $accessToken)) {
-                        throw new \Exception(join(', ', $accessToken));
-                    }
+            if ($this->client->isAccessTokenExpired()) {
+                $authCode = $request->code;
+                $accessToken = $this->client->fetchAccessTokenWithAuthCode($authCode);
+                $this->client->setAccessToken($accessToken);
+
+                if (array_key_exists('error', $accessToken)) {
+                    throw new \Exception(join(', ', $accessToken));
                 }
                 file_put_contents($tokenPath, json_encode($this->client->getAccessToken()));
             }
