@@ -176,7 +176,7 @@
                                                 <option value="">---選択してください---</option>
                                                 @foreach ($dayOfWeeks as $dayOfWeek)
                                                     <option value="{{ $dayOfWeek }}"
-                                                        @if ($dayOfWeeks[$subject->day_of_week_2] == $dayOfWeek)
+                                                        @if ($subject->day_of_week_2 && $dayOfWeeks[$subject->day_of_week_2] == $dayOfWeek)
                                                             selected
                                                         @endif
                                                     >{{ $dayOfWeek }}</option>
