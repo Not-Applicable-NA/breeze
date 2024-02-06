@@ -130,8 +130,8 @@
                                         <x-input-label for="dayofweek" :value="__('Day of week')" />
                                         <select name="dayofweek" id="dayofweek" class="mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" required autofocus>
                                             <option value="">---選択してください---</option>
-                                            @foreach ($dayOfWeeks as $dayOfWeek)
-                                                <option value="{{ $dayOfWeek }}"
+                                            @foreach ($dayOfWeeks as $i => $dayOfWeek)
+                                                <option value="{{ $i }}"
                                                     @if ($dayOfWeeks[$subject->day_of_week_1] == $dayOfWeek)
                                                         selected
                                                     @endif
@@ -174,8 +174,8 @@
                                             <x-input-label for="dayofweek2" :value="__('Day of week')" />
                                             <select name="dayofweek2" id="dayofweek2" class="mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" autofocus>
                                                 <option value="">---選択してください---</option>
-                                                @foreach ($dayOfWeeks as $dayOfWeek)
-                                                    <option value="{{ $dayOfWeek }}"
+                                                @foreach ($dayOfWeeks as $i => $dayOfWeek)
+                                                    <option value="{{ $i }}"
                                                         @if ($subject->day_of_week_2 && $dayOfWeeks[$subject->day_of_week_2] == $dayOfWeek)
                                                             selected
                                                         @endif
