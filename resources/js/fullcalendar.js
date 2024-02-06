@@ -1,5 +1,7 @@
 import { Calendar } from "fullcalendar";
 import googleCalendarPlugin from '@fullcalendar/google-calendar';
+import tippy from "tippy.js";
+import 'tippy.js/dist/tippy.css';
 
 document.addEventListener('DOMContentLoaded', function() {
     let calendarEl = document.getElementById('calendar');
@@ -13,6 +15,14 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         dayCellContent: function (arg) {
             return arg.date.getDate();
+        eventDidMount: function (arg) {
+            tippy(
+                arg.el,
+                {
+                    allowHTML: true,
+                    content: '<p style="font-size:125%;">' + arg.event.title + '</p>',
+                }
+            );
         }
     });
     calendar.render();
