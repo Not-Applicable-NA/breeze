@@ -54,7 +54,7 @@ class TakenController extends Controller
             abort(500);
         }
         foreach (Event::get(startDateTime: $semetserStartDt, endDateTime: $semetserEndDt->addDay()) as $event) {
-            if ($event->name === $subject->name) {
+            if ($event->name === $subject->name . '(' . $subject->main_lecture_room . ')') {
                 $event->delete();
             }
         }
@@ -86,7 +86,8 @@ class TakenController extends Controller
             for ($i = 0; $i <= $semetserStartDt->diffInDays($semetserEndDt); $i++) {
                 if ($dt->dayOfWeek === $subject->day_of_week_1) {
                     $event = new Event;
-                    $event->name = $subject->name;
+                    $event->name = $subject->name . '(' . $subject->main_lecture_room . ')';
+                    $event->description = $subject->syllabus;
                     $event->reminders = $reminders;
                     $startDt = $this->getStartDateTime($dt, $subject->period_1);
                     $endDt = $this->getEndDateTime($startDt->copy(), $subject->is_in_a_row_1);
@@ -95,7 +96,8 @@ class TakenController extends Controller
                     $event->save();
                 } elseif ($dt->dayOfWeek === $subject->day_of_week_2) {
                     $event = new Event;
-                    $event->name = $subject->name;
+                    $event->name = $subject->name . '(' . $subject->main_lecture_room . ')';
+                    $event->description = $subject->syllabus;
                     $event->reminders = $reminders;
                     $startDt = $this->getStartDateTime($dt, $subject->period_2);
                     $endDt = $this->getEndDateTime($startDt->copy(), $subject->is_in_a_row_2);

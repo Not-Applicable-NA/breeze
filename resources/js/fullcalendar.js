@@ -15,6 +15,13 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         dayCellContent: function (arg) {
             return arg.date.getDate();
+        },
+
+        eventClick: function (arg) {
+            window.open(arg.event.extendedProps.description);
+            arg.jsEvent.preventDefault();
+        },
+
         eventDidMount: function (arg) {
             tippy(
                 arg.el,
