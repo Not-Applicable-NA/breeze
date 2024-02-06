@@ -13,6 +13,19 @@ document.addEventListener('DOMContentLoaded', function() {
         events: {
             googleCalendarId: calendarId
         },
+        nowIndicator: true,
+        headerToolbar: {
+            left: 'dayGridMonth,timeGridWeek',
+            center: 'title',
+            right: 'today prev,next',
+        },
+        buttonText: {
+            today: '今日',
+            month: '月',
+            week: '週',
+        },
+        allDayText: '終日',
+        
         dayCellContent: function (arg) {
             return arg.date.getDate();
         },
