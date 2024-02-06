@@ -46,9 +46,9 @@
                                     </td>
                                     <td class="border-t p-2">{{ $subject->semester }}</td>
                                     <td class="border-t p-2">
-                                        {{ $subject->day_of_week_1 }}{{ $subject->period_1 }}@if ($subject->is_in_a_row_1), {{ $subject->period_1+1 }}@endif
+                                        {{ $dayOfWeeks[$subject->day_of_week_1] }}{{ $subject->period_1 }}@if ($subject->is_in_a_row_1), {{ $subject->period_1+1 }}@endif
                                         @if ( $subject->day_of_week_2)
-                                            <br> {{ $subject->day_of_week_2 }}{{ $subject->period_2 }}@if ($subject->is_in_a_row_2), {{ $subject->period_2+1 }}@endif
+                                            <br> {{ $dayOfWeeks[$subject->day_of_week_2] }}{{ $subject->period_2 }}@if ($subject->is_in_a_row_2), {{ $subject->period_2+1 }}@endif
                                         @endif
                                     </td>
                                     <td class="border-t p-2">{{ $subject->main_lecture_room }}</td>

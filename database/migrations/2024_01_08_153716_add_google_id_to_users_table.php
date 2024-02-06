@@ -12,8 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            // クラスカラムを追加
-            $table->foreignId('class_id')->after('password')->nullable()->constrained()->cascadeOnDelete();
+            $table->string('google_id')->after('id');
+            $table->dropColumn('password');
+            $table->string('google_access_token')->after('remember_token');
+            $table->string('google_refresh_token')->after('google_access_token')->nullable();
         });
     }
 
@@ -23,9 +25,10 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            // クラスカラムを削除
-            $table->dropForeign('users_class_id_foreign');
-            $table->dropColumn('class_id');
+            $table->dropColumn('google_id');
+            $table->string('password')->after('email_verified_at');
+            $table->dropColumn('google_access_token');
+            $table->dropColumn('google_refresh_token');
         });
     }
 };

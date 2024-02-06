@@ -17,7 +17,7 @@ class SubjectController extends Controller
     private $credits = [1, 2, 4];
     private $grades = [1, 2, 3, 4];
     private $semesters = ['前期', '前期前半', '前期後半', '後期', '後期前半', '後期後半'];
-    private $dayOfWeeks = ['月', '火', '水', '木', '金', '土', '日'];
+    private $dayOfWeekNumbers = [0, 1, 2, 3, 4, 5, 6];
     private $periods = [1, 2, 3, 4, 5, 6];
 
     public function __construct() {
@@ -38,7 +38,7 @@ class SubjectController extends Controller
         $classes = ClassList::where(
             'major_id', '=', $user->class->major->id
         )->get();
-        $dayOfWeeks = $this->dayOfWeeks;
+        $dayOfWeeks = ['日', '月', '火', '水', '木', '金', '土'];
         $periods = $this->periods;
         
         return view('subjects.subjects', compact(
@@ -61,15 +61,15 @@ class SubjectController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'credits' => ['required', Rule::in([0, 1, 2, 4])],
-            'grade' => ['required', Rule::in([1, 2, 3, 4])],
+            'credits' => ['required', Rule::in($this->credits)],
+            'grade' => ['required', Rule::in($this->grades)],
             'obligatory' => ['boolean'],
-            'semester' => ['required', Rule::in(['前期', '前期前半', '前期後半', '後期', '後期前半', '後期後半'])],
-            'dayofweek' => ['required', Rule::in(['月', '火', '水', '木', '金', '土', '日'])],
-            'period' => ['required', Rule::in([1, 2, 3, 4, 5, 6])],
+            'semester' => ['required', Rule::in($this->semesters)],
+            'dayofweek' => ['required', Rule::in($this->dayOfWeekNumbers)],
+            'period' => ['required', Rule::in($this->periods)],
             'inarow' => ['boolean'],
-            'dayofweek2' => ['nullable', Rule::in(['月', '火', '水', '木', '金', '土', '日'])],
-            'period2' => ['nullable', Rule::in([1, 2, 3, 4, 5, 6])],
+            'dayofweek2' => ['nullable', Rule::in($this->dayOfWeekNumbers)],
+            'period2' => ['nullable', Rule::in($this->periods)],
             'inarow2' => ['nullable', 'boolean'],
             'room' => ['required', 'string', 'max:255' ],
             'syllabus' => ['required', 'string', 'max:255' ],
@@ -117,7 +117,7 @@ class SubjectController extends Controller
         $classes = ClassList::where(
             'major_id', '=', $user->class->major->id
         )->get();
-        $dayOfWeeks = $this->dayOfWeeks;
+        $dayOfWeeks = ['日', '月', '火', '水', '木', '金', '土'];
         $periods = $this->periods;
         
         return view('subjects.edit', compact(
@@ -140,15 +140,15 @@ class SubjectController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'credits' => ['required', Rule::in([0, 1, 2, 4])],
-            'grade' => ['required', Rule::in([1, 2, 3, 4])],
+            'credits' => ['required', Rule::in($this->credits)],
+            'grade' => ['required', Rule::in($this->grades)],
             'obligatory' => ['boolean'],
-            'semester' => ['required', Rule::in(['前期', '前期前半', '前期後半', '後期', '後期前半', '後期後半'])],
-            'dayofweek' => ['required', Rule::in(['月', '火', '水', '木', '金', '土', '日'])],
-            'period' => ['required', Rule::in([1, 2, 3, 4, 5, 6])],
+            'semester' => ['required', Rule::in($this->semesters)],
+            'dayofweek' => ['required', Rule::in($this->dayOfWeekNumbers)],
+            'period' => ['required', Rule::in($this->periods)],
             'inarow' => ['boolean'],
-            'dayofweek2' => ['nullable', Rule::in(['月', '火', '水', '木', '金', '土', '日'])],
-            'period2' => ['nullable', Rule::in([1, 2, 3, 4, 5, 6])],
+            'dayofweek2' => ['nullable', Rule::in($this->dayOfWeekNumbers)],
+            'period2' => ['nullable', Rule::in($this->periods)],
             'inarow2' => ['nullable', 'boolean'],
             'room' => ['required', 'string', 'max:255' ],
             'syllabus' => ['required', 'string', 'max:255' ],

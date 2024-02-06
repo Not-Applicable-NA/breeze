@@ -99,8 +99,8 @@
                                         <x-input-label for="dayofweek" :value="__('Day of week')" />
                                         <select name="dayofweek" id="dayofweek" class="mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" required autofocus>
                                             <option value="">---選択してください---</option>
-                                            @foreach ($dayOfWeeks as $dayOfWeek)
-                                                <option value="{{ $dayOfWeek }}">{{ $dayOfWeek }}</option>
+                                            @foreach ($dayOfWeeks as $i => $dayOfWeek)
+                                                <option value="{{ $i }}">{{ $dayOfWeek }}</option>
                                             @endforeach
                                             <x-input-error :messages="$errors->get('dayofweek')" class="mt-2" />
                                         </select>
@@ -131,8 +131,8 @@
                                             <x-input-label for="dayofweek2" :value="__('Day of week')" />
                                             <select name="dayofweek2" id="dayofweek2" class="mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" autofocus>
                                                 <option value="">---選択してください---</option>
-                                                @foreach ($dayOfWeeks as $dayOfWeek)
-                                                    <option value="{{ $dayOfWeek }}">{{ $dayOfWeek }}</option>
+                                                @foreach ($dayOfWeeks as $i => $dayOfWeek)
+                                                    <option value="{{ $i }}">{{ $dayOfWeek }}</option>
                                                 @endforeach
                                                 <x-input-error :messages="$errors->get('dayofweek2')" class="mt-2" />
                                             </select>
@@ -216,9 +216,9 @@
                                             </td>
                                             <td class="border-t p-2">{{ $subject->semester }}</td>
                                             <td class="border-t p-2">
-                                                {{ $subject->day_of_week_1 }}{{ $subject->period_1 }}@if ($subject->is_in_a_row_1), {{ $subject->period_1+1 }}@endif
-                                                @if ( $subject->day_of_week_2)
-                                                    <br> {{ $subject->day_of_week_2 }}{{ $subject->period_2 }}@if ($subject->is_in_a_row_2), {{ $subject->period_2+1 }}@endif
+                                                {{ $dayOfWeeks[$subject->day_of_week_1] }}{{ $subject->period_1 }}@if ($subject->is_in_a_row_1), {{ $subject->period_1+1 }}@endif
+                                                @if ( $subject->day_of_week_2 )
+                                                    <br> {{ $dayOfWeeks[$subject->day_of_week_2] }}{{ $subject->period_2 }}@if ($subject->is_in_a_row_2), {{ $subject->period_2+1 }}@endif
                                                 @endif
                                             </td>
                                             <td class="border-t p-2">{{ $subject->main_lecture_room }}</td>

@@ -16,6 +16,8 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "fullcalendar": "^6.1.9"
+        "@fullcalendar/google-calendar": "^6.1.10",
+        "fullcalendar": "^6.1.9",
+        "tippy.js": "^6.3.7"
     }
 }
