@@ -183,9 +183,9 @@
                                     登録
                                 </x-primary-button>
                             </div>
-                            <div class="overflow-auto h-[720px]">
-                                <table class="mt-4 w-full border-collapse text-center whitespace-nowrap">
-                                    <thead>
+                            <div class="mt-4 overflow-auto h-[720px]">
+                                <table class="w-full border-collapse text-center whitespace-nowrap">
+                                    <thead class="sticky top-0 dark:bg-slate-900">
                                         <tr>
                                             <th class="p-2">科目名</th>
                                             <th class="p-2">単位数</th>
