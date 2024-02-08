@@ -89,7 +89,7 @@
                                 <div class="mt-4">{{ __('Teachers in charge') }}</div>
                                 <div class="flex flex-wrap">
                                     @foreach ($teachers as $teacher)
-                                        <div class="mr-3 w-40">
+                                        <div class="mr-3 w-48">
                                             <input id="teacher_{{ $teacher->id }}" type="checkbox" name="teacher[]" value="{{ $teacher->id }}" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
                                                 @foreach ($subject->teachers as $teacherInCharge)
                                                     @if ($teacherInCharge->name == $teacher->name)
