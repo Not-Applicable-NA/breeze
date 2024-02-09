@@ -30,8 +30,8 @@ class TeacherController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.Teacher::class],
-            'labno' => ['required', 'string']
+            'email' => ['nullable', 'string', 'email', 'max:255', 'unique:'.Teacher::class],
+            'labno' => ['nullable', 'string']
         ]);
 
         Teacher::create([
@@ -63,8 +63,8 @@ class TeacherController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.Teacher::class],
-            'labno' => ['required', 'string']
+            'email' => ['nullable', 'string', 'email', 'max:255', 'unique:'.Teacher::class],
+            'labno' => ['nullable', 'string']
         ]);
 
         $teacher = Teacher::find($request->teacherId);

@@ -22,14 +22,14 @@
                         <!-- Email Address -->
                         <div class="mt-4">
                             <x-input-label for="email" :value="__('Teacher Email')" />
-                            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" required autofocus />
+                            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" autofocus />
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
                         
                         <!-- Laboratory No -->
                         <div class="mt-4">
                             <x-input-label for="labno" :value="__('Laboratory No')" />
-                            <x-text-input id="labno" class="block mt-1 w-1/3" type="number" name="labno" required autofocus />
+                            <x-text-input id="labno" class="block mt-1 w-1/3" type="number" name="labno" autofocus />
                             <x-input-error :messages="$errors->get('labno')" class="mt-2" />
                         </div>
                         

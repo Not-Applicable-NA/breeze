@@ -89,7 +89,7 @@
                                 <div class="mt-4">{{ __('Teachers in charge') }}</div>
                                 <div class="flex flex-wrap">
                                     @foreach ($teachers as $teacher)
-                                        <div class="mr-3 w-40">
+                                        <div class="mr-3 w-48">
                                             <input id="teacher_{{ $teacher->id }}" type="checkbox" name="teacher[]" value="{{ $teacher->id }}" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
                                                 @foreach ($subject->teachers as $teacherInCharge)
                                                     @if ($teacherInCharge->name == $teacher->name)
@@ -130,8 +130,8 @@
                                         <x-input-label for="dayofweek" :value="__('Day of week')" />
                                         <select name="dayofweek" id="dayofweek" class="mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" required autofocus>
                                             <option value="">---選択してください---</option>
-                                            @foreach ($dayOfWeeks as $dayOfWeek)
-                                                <option value="{{ $dayOfWeek }}"
+                                            @foreach ($dayOfWeeks as $i => $dayOfWeek)
+                                                <option value="{{ $i }}"
                                                     @if ($dayOfWeeks[$subject->day_of_week_1] == $dayOfWeek)
                                                         selected
                                                     @endif
@@ -174,9 +174,9 @@
                                             <x-input-label for="dayofweek2" :value="__('Day of week')" />
                                             <select name="dayofweek2" id="dayofweek2" class="mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" autofocus>
                                                 <option value="">---選択してください---</option>
-                                                @foreach ($dayOfWeeks as $dayOfWeek)
-                                                    <option value="{{ $dayOfWeek }}"
-                                                        @if ($dayOfWeeks[$subject->day_of_week_2] == $dayOfWeek)
+                                                @foreach ($dayOfWeeks as $i => $dayOfWeek)
+                                                    <option value="{{ $i }}"
+                                                        @if ($subject->day_of_week_2 && $dayOfWeeks[$subject->day_of_week_2] == $dayOfWeek)
                                                             selected
                                                         @endif
                                                     >{{ $dayOfWeek }}</option>
