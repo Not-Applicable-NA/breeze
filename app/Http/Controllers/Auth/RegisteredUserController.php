@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\ClassList;
+use App\Models\Major;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -15,12 +17,21 @@ use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
+
+    private $class;
+
+    public function __construct()
+    {
+        $this->class = new ClassList();
+    }
+
     /**
      * Display the registration view.
      */
     public function create(): View
     {
-        return view('auth.register');
+        $classes = $this->class->getAllClasses();
+        return view('auth.register', compact('classes'));
     }
 
     /**
@@ -34,12 +45,14 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'class' => ['required', 'string'],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'class_id' => $this->class->getClass($request->class)->id
         ]);
 
         event(new Registered($user));
