@@ -31,15 +31,23 @@ DB_HOST=mysql
 ```
 `DB_USERNAME=`、および`DB_PASSWORD=`については、`breeze.zip`の`env.txt`からコピーしてください。<br>
 
-**アプリが使用するGoogleカレンダーのカレンダーIDの取得**<br>
+**Googleカレンダーの設定**<br>
 本アプリはGoogleカレンダーAPIを利用します。<br>
-APIに使用させたいカレンダーを作成し、そのカレンダーIDを`.env`の`GOOGLE_CALENDAR_ID=`に記入してください。<br>
-カレンダーIDは、カレンダーの設定画面から取得できます。詳しい手順については省略します。<br>
+まず、APIが利用するカレンダーを作成します。<br>
+[Googleカレンダー](https://calendar.google.com/)へアクセスし、新しいカレンダーを作成してください。名前は適当でかまいません。<br>
+![new-calendar](images/new-calendar.png)
+次に、作成したカレンダーの設定を開きます。<br>
+マイカレンダーから先ほど作成したカレンダーを選択し、「設定と共有」を開いてください。<br>
+![calendar-settings](images/calendar-settings.png)
+設定を開いたら、「予定のアクセス制限」から、「一般公開して誰でも利用できるようにする」にチェックをいれてください。<br>
+![calendar-publish](images/calendar-publish.png)
+次に、「カレンダーの統合」から、カレンダーIDをコピーして、`.env`の`GOOGLE_CALENDAR_ID=`に貼り付けてください。<br>
+![calendar-id](images/calendar-id.png)
 
 **OAuth認証情報とAPIキー設定**<br>
 本アプリの利用するGoogleカレンダーAPIでは、OAuth認証とAPIキーの両方が必要です。<br>
 まず、`breeze.zip`の`google-calendar`ディレクトリを`storage/app/`内にコピーしてください。<br>
-その後、ディレクトリ内の`oauth-credentials.json`を開き、`client_id`と`client_secret`を`.env`の`GOOGLE_CLIENT_ID=`と`GOOGLE_CLIENT_SECRET=`にコピーしてください。<br>
+次に、`google-calendar`ディレクトリ内にある`oauth-credentials.json`を開き、`client_id`と`client_secret`をコピーし、`.env`の`GOOGLE_CLIENT_ID=`、および`GOOGLE_CLIENT_SECRET=`に貼り付けてください。<br>
 次に、`breeze.zip`の`env.txt`に記載されている`GOOGLE_CALENDAR_API_KEY=`を、`.env`の`GOOGLE_CALENDAR_API_KEY=`にコピーしてください。
 
 **APP_KEYの生成**<br>
@@ -67,46 +75,47 @@ Sailをバッググランドで起動します。<br>
 [Localhost](http://localhost)へアクセスし、次のようなページが表示されたら構築完了です。
 ![top-page](images/top-page.png)
 
-## Learning Laravel
+## 使い方
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**ログイン**<br>
+Localhostへアクセス後、画面右上のボタンよりをクリックし、Googleアカウントでログインしてください。<br>ただし、大学アカウントの場合ブロックされますので、個人用アカウント等でログインしてください。
+![top-page](images/top-page.png)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+**所属クラス設定**<br>
+初めてログインした際、そのユーザーには所属学科が設定されていませんので、アカウント情報を編集し、所属クラスを設定してください。
+![class-setting](images/class-setting.png)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+**学期情報設定**<br>
+まずは学期情報を設定します。<br>
+`学期情報`ページへアクセスし、学年歴等を参照しながら、各学期の開始日、終了日を設定してください。
+![semesters](images/semesters.png)
 
-## Laravel Sponsors
+**教員情報追加**<br>
+次に教員情報を追加していきます。<br>
+`教員一覧`ページへアクセスし、フォームに氏名、メールアドレス、研究室番号を入力して追加してください。<br>
+メールアドレス、研究室を持たない場合は、未入力でもかまいません。<br>
+追加された教員情報は、編集ボタンから編集できます。<br>
+また、削除ボタンを押すと削除できます。
+![teachers](images/teachers.png)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+**科目追加**<br>
+`履修科目一覧`ページから、`履修科目を登録する`ボタンを押すと、所属学科の科目一覧が表示されます。<br>
+![add-subjects](images/add-subjects.png)<br>
+以下の科目追加フォームを入力し、その学科で履修可能な科目を追加してください。
+![subject-form](images/subject-form.png)
 
-### Premium Partners
+**履修科目登録**<br>
+上記の科目追加フォームの下に、先ほど追加した科目の一覧が表示されます。<br>
+この科目の中から、ユーザーが履修している科目のチェックボックスを選択し、登録のボタンをクリックすることで、履修科目が登録されます。
+![subjects](images/subjects.png)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+**履修科目確認**<br>
+`履修科目一覧`ページで、ユーザーが履修した科目の一覧が表示されます。<br>
+履修を終えた科目等は、削除ボタンを押すことで一覧から削除されます。
+![taken-subjects](images/taken-subjects.png)
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**授業スケジュール確認**<br>
+`授業スケジュール`ページで、ユーザーが履修した科目の授業日時がカレンダーに表示されます。<br>
+履修科目が削除されると、カレンダーからも削除されます。<br>
+カレンダーに表示された科目名をクリックすると、その科目のシラバスへジャンプします。
+![schedules](images/schedules.png)
