@@ -29,6 +29,18 @@ DB_HOST=127.0.0.1
 ↓
 DB_HOST=mysql
 ```
+`DB_USERNAME=`、および`DB_PASSWORD=`については、`breeze.zip`の`env.txt`からコピーしてください。<br>
+
+**アプリが使用するGoogleカレンダーのカレンダーIDの取得**<br>
+本アプリはGoogleカレンダーAPIを利用します。<br>
+APIに使用させたいカレンダーを作成し、そのカレンダーIDを`.env`ファイルの`GOOGLE_CALENDAR_ID=`に記入してください。<br>
+カレンダーIDは、カレンダーの設定画面から取得できます。詳しい手順については省略します。<br>
+
+**OAuth認証情報とAPIキー設定**<br>
+本アプリの利用するGoogleカレンダーAPIでは、OAuth認証とAPIキーの両方が必要です。<br>
+まず、`breeze.zip`の`google-calendar`ディレクトリを`storage/app/`内にコピーしてください。<br>
+その後、`google-calendar`ディレクトリ内の`oauth-credentials.json`を開き、`client_id`と`client_secret`を`.env`ファイルの`GOOGLE_CLIENT_ID=`と`GOOGLE_CLIENT_SECRET=`にコピーしてください。<br>
+次に、`breeze.zip`の`env.txt`に記載されている`GOOGLE_CALENDAR_API_KEY=`を、`.env`の`GOOGLE_CALENDAR_API_KEY=`にコピーしてください。
 
 **APP_KEYの生成**<br>
 Sailをバッググランドで起動します。<br>
