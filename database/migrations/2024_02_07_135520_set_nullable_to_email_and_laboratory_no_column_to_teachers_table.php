@@ -22,9 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('teachers', function (Blueprint $table) {
-            $table->string('email')->change();
-            $table->string('laboratory_no')->change();
-        });
+        
     }
 };
