@@ -33,13 +33,13 @@ DB_HOST=mysql
 
 **アプリが使用するGoogleカレンダーのカレンダーIDの取得**<br>
 本アプリはGoogleカレンダーAPIを利用します。<br>
-APIに使用させたいカレンダーを作成し、そのカレンダーIDを`.env`ファイルの`GOOGLE_CALENDAR_ID=`に記入してください。<br>
+APIに使用させたいカレンダーを作成し、そのカレンダーIDを`.env`の`GOOGLE_CALENDAR_ID=`に記入してください。<br>
 カレンダーIDは、カレンダーの設定画面から取得できます。詳しい手順については省略します。<br>
 
 **OAuth認証情報とAPIキー設定**<br>
 本アプリの利用するGoogleカレンダーAPIでは、OAuth認証とAPIキーの両方が必要です。<br>
 まず、`breeze.zip`の`google-calendar`ディレクトリを`storage/app/`内にコピーしてください。<br>
-その後、`google-calendar`ディレクトリ内の`oauth-credentials.json`を開き、`client_id`と`client_secret`を`.env`ファイルの`GOOGLE_CLIENT_ID=`と`GOOGLE_CLIENT_SECRET=`にコピーしてください。<br>
+その後、ディレクトリ内の`oauth-credentials.json`を開き、`client_id`と`client_secret`を`.env`の`GOOGLE_CLIENT_ID=`と`GOOGLE_CLIENT_SECRET=`にコピーしてください。<br>
 次に、`breeze.zip`の`env.txt`に記載されている`GOOGLE_CALENDAR_API_KEY=`を、`.env`の`GOOGLE_CALENDAR_API_KEY=`にコピーしてください。
 
 **APP_KEYの生成**<br>
@@ -51,12 +51,21 @@ Sailをバッググランドで起動します。<br>
 **テーブルの作成**<br>
 以下のコマンドでテーブルを作成します。<br>
 `sail artisan migrate`<br>
-作成したテーブルに学部、学科、クラス、学期データを挿入するため、シーディングを行います。
+`Nothing to migrate`と返された場合、すでにマイグレーション済みとなっていますが、念のため、`sail artisan migrate:refresh`で作成し直してください。<br>
+作成されたテーブルに学部、学科、クラス、学期データを挿入するため、シーディングを行います。<br>
 `sail artisan db:seed`<br>
 
 **npmパッケージのインストール**<br>
 以下のコマンドでnpmパッケージをインストールします。<br>
 `sail npm install`<br>
+
+**viteの起動**<br>
+以下のコマンドでviteを起動します。<br>
+`sail npm run dev`<br>
+
+**Localhostへアクセス**<br>
+[Localhost](http://localhost)へアクセスし、次のようなページが表示されたら構築完了です。
+![top-page](images/top-page.png)
 
 ## Learning Laravel
 
